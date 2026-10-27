@@ -167,9 +167,12 @@ bool NotePrint(const char *text);
 void NotePrintln(const char *line);
 bool NotePrintf(const char *format, ...);
 
+#include <string.h>   // pulls in features.h so __GLIBC__ is defined on Linux
+#if !(defined(__GLIBC__) && (__GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 38)))
 // String helpers to help encourage the world to abandon the horribly-error-prone strn*
 size_t strlcpy(char *dst, const char *src, size_t siz);
 size_t strlcat(char *dst, const char *src, size_t siz);
+#endif
 
 // JSON helpers
 void JInit(void);
